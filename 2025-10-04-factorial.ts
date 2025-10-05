@@ -3,7 +3,7 @@
 function factorial(n: number){
     let output: number = 1;
     if(n <= 0){
-        alert("Input number must greater that zero.");
+        alert("Input number must greater than zero.");
         return;
     }
 
@@ -20,7 +20,7 @@ function factorial2(n: number){
     let output: number = 1;
     let i: number = 1;
     if(n <= 0){
-        alert("Input number must greater that zero.");
+        alert("Input number must greater than zero.");
         return;
     }
 

@@ -12,21 +12,21 @@
 // }
 
 function getStarString(numOfStars: number): string {
-    let output: string = "";
-    for(let i = 1; i <= numOfStars; i++) {
-        output += "*";
-    }
-    return output;
+  let output: string = "";
+  for (let i = 1; i <= numOfStars; i++) {
+    output += "*";
+  }
+  return output;
 }
 
 function getSpaceString(numOfSpaces: number): string {
-    let output: string = "";
-    for(let i = 1; i <= numOfSpaces; i++) {
-        output += " ";
-    }
-    return output;
+  let output: string = "";
+  for (let i = 1; i <= numOfSpaces; i++) {
+    output += " ";
+  }
+  return output;
 }
 
-for (let i = 5; i > 0; i--) {
-    console.log(getSpaceString(5 - i), getStarString(i));
+for (let row = 5; row > 0; row--) {
+  console.log(getSpaceString(5 - row) + getStarString(row));
 }

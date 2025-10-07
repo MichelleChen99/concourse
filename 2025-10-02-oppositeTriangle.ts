@@ -14,11 +14,11 @@
 let numOfRows: number = 5;
 let output: string = "\n";
 
-for(let row: number = 1; row <= numOfRows; row++){
-    for(let i: number = numOfRows; i >= row; i--){
-      output += "*"
+for (let row: number = 1; row <= numOfRows; row++) {
+  for (let i: number = numOfRows; i >= row; i--) {
+    output += "*";
   }
-  output += "\n";
+  output += "\n"; // 為配合TS Playground版面，首行空一行才能對齊
 }
 
 // 2. while
@@ -52,14 +52,14 @@ for(let row: number = 1; row <= numOfRows; row++){
 
 let row: number = 1;
 
-while(row <= numOfRows) {
-    let i: number = numOfRows;
-    while(i >= row){
-      output += "*";
-      i--;
-    }
-    output += "\n";
-    row++;
+while (row <= numOfRows) {
+  let i: number = numOfRows;
+  while (i >= row) {
+    output += "*";
+    i--;
+  }
+  output += "\n";
+  row++;
 }
-    
+
 console.log(output);

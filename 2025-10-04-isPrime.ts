@@ -32,7 +32,7 @@ function isPrime2(n: number){
     else {
         while(i < n){
             if(n % i === 0) result = false;
-            i++;
+            else i++; // else：若餘數!==0，才繼續下一輪迴圈；若等於0，則停止
             break;
         }
     }

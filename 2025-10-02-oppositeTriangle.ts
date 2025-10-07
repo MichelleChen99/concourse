@@ -1,4 +1,3 @@
-// 倒直角三角形
 // 範例：
 // let numOfRows: number = 10;
 // let output: string = "\n"
@@ -10,7 +9,7 @@
 //     output += "\n" //new line
 // }
 
-
+// 倒直角三角形
 // 1. for
 let numOfRows: number = 5;
 let output: string = "\n";

@@ -58,7 +58,7 @@ function fibonacci4(n: number){
         lastOne = current;
         current = lastTwo + lastOne;
 
-        output += current;
+        output += `${current}, `;
         i++;
     }
     return output.slice(0, -2);

@@ -17,12 +17,12 @@ console.log(factorial(6));
 
 // 2. while
 function factorial2(n: number) {
-  let output: number = 1;
   if (n <= 0) {
     alert("Input number must be greater than zero.");
     return;
   }
 
+  let output: number = 1;
   let i: number = 1;
   while (i <= n) {
     output *= i;

@@ -24,14 +24,14 @@
 // }
 
 function diamond(numOfRows3: number) {
-  let middle: number = (numOfRows3 + 1) / 2;
-  let output: string = "\n";
-
   // 檢驗參數是否為奇數
   if (numOfRows3 % 2 === 0) {
     alert("Input number must be odd.");
     return;
   }
+
+  let middle: number = (numOfRows3 + 1) / 2;
+  let output: string = "\n";
 
   for (let row: number = 1; row <= numOfRows3; row++) {
     if (row <= middle) {
@@ -61,15 +61,14 @@ console.log(diamond(5));
 
 // 2. while
 function diamond2(numOfRows4: number) {
-  let middle: number = (numOfRows4 + 1) / 2;
-  let row: number = 1;
-  let output: string = "\n";
-
-  // 檢驗參數是否為奇數
   if (numOfRows4 % 2 === 0) {
     alert("Input number must be odd.");
     return;
   }
+
+  let middle: number = (numOfRows4 + 1) / 2;
+  let row: number = 1;
+  let output: string = "\n";
 
   while (row <= numOfRows4) {
     if (row <= middle) {
@@ -110,15 +109,15 @@ console.log(diamond2(5));
 // 迴圈印星號：只有第一次印1個，之後每次迴圈都印2個，主體邏輯要怎麼寫？ => 改良版
 // 3. for改良版
 function diamond3(numOfRows: number) {
-  let output: string = "\n";
-  let middle: number = Math.ceil(numOfRows / 2);
-  let row: number = 1;
-  let spaces: number, stars: number;
-
   if (numOfRows % 2 === 0) {
     alert("Input number must be odd.");
     return;
   }
+
+  let output: string = "\n";
+  let middle: number = Math.ceil(numOfRows / 2);
+  let row: number = 1;
+  let spaces: number, stars: number;
 
   for (row = 1; row <= numOfRows; row++) {
     if (row <= middle) {
@@ -145,14 +144,14 @@ console.log(diamond3(13));
 
 // 4. while改良版
 function diamond4(numOfRows: number) {
-  let output: string = "\n";
-  let middle: number = Math.ceil(numOfRows / 2);
-  let row: number = 1;
-
   if (numOfRows % 2 === 0) {
     alert("Input number must be odd.");
     return;
   }
+
+  let output: string = "\n";
+  let middle: number = Math.ceil(numOfRows / 2);
+  let row: number = 1;
 
   while (row <= numOfRows) {
     let spaces: number, stars: number;

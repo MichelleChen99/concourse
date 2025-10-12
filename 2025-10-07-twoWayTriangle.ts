@@ -1,3 +1,4 @@
+// 印星星+空格抽出function
 function getStarString2(numOfStars: number): string {
   let output: string = "";
   for (let i = 1; i <= numOfStars; i++) {

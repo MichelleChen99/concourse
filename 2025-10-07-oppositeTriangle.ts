@@ -1,3 +1,4 @@
+// 印星星+空格抽出function
 // 範例：
 // function getStarString(numOfStars: number): string {
 //     return ""
@@ -11,22 +12,22 @@
 //     console.log(getStarString(i))
 // }
 
-function getStarString(numOfStars: number): string {
+// 1. 輸出字串的通用函式
+function getString(char: string, count: number): string {
   let output: string = "";
-  for (let i = 1; i <= numOfStars; i++) {
-    output += "*";
+  for (let i = 1; i <= count; i++) {
+    output += char;
   }
   return output;
 }
 
-function getSpaceString(numOfSpaces: number): string {
+// 2. 輸出倒直角三角形
+function oppositeTriangle(numOfRows: number) {
   let output: string = "";
-  for (let i = 1; i <= numOfSpaces; i++) {
-    output += " ";
+  for (let i = numOfRows; i > 0; i--) {
+    output += getString(" ", 5 - i) + getString("*", i) + "\n";
   }
   return output;
 }
 
-for (let row = 5; row > 0; row--) {
-  console.log(getSpaceString(5 - row) + getStarString(row));
-}
+console.log(oppositeTriangle(5));

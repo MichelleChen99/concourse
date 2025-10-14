@@ -12,7 +12,11 @@
 // }
 
 //  b. 迴圈跑出任一false，就判定為非矩陣
-function isMatrix(a: Array<Array<number>>): boolean {
+export function isMatrix(a: Array<Array<number>>): boolean {
+    if (a.length === 0) {
+        return false;
+    } // 處理空陣列
+
         for(let row: number = 1; row < a.length; row++) {
             // console.log("log: ", a[0].length === a[row].length);
             if(a[0].length !== a[row].length) {

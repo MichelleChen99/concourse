@@ -41,14 +41,15 @@ function test1(): boolean {
     //     }
     // }
 
-    // 補充：在單元測試用 Math.random() 會造成測試非決定性，容易 intermittent fail ，故不建議使用。
     for (let j = 0; j < 100; j++) {
-        const r = Math.floor(Math.random() * 100 - 1) || -1 * Math.floor(Math.random() * 100 - 1);
+        const r = (Math.random() < 0.5 ? -1 : 1) * Math.floor(Math.random() * 100); // 範圍：-99 ~ 99
+
         const expectedResult = (r >= 0 && r <= 4);
         if (binarySearch(array, r) != expectedResult) {
             return false
         }
-        // if (binarySearch(array, -r) != expectedResult) {
+        // 錯誤寫法 （expectedResult得跟著改成 -r 才能用）=> expectedResult 和待測函式傳入的參數要維持一致
+        // if (binarySearch(array, r) != expectedResult || binarySearch(array, -r) != expectedResult) {
         //     return false
         // }
     }

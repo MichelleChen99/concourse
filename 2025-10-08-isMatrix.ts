@@ -1,5 +1,5 @@
 // 2. 判斷是否為 matrix
-//  a. 用新陣列儲存布林值
+//  解法a. 用新陣列儲存布林值
 // function isMatrix(a: Array<Array<number>>): boolean {
 //     let result: Array<boolean> = [];
 //     for(let row: number = 1; row < a.length; row++) {
@@ -11,7 +11,7 @@
 //     return true;
 // }
 
-//  b. 迴圈跑出任一false，就判定為非矩陣
+//  解法b. 迴圈跑出任一false，就判定為非矩陣
 export function isMatrix(a: Array<Array<number>>): boolean {
     if (a.length === 0) {
         return false;

@@ -34,7 +34,7 @@ function modify(array: Array<number>) {
 }
 
 function modify2(array: Array<number>) {
-    array = [1, 2, 3]
+   return array = [1, 2, 3]
 }
 
 let w = 0;

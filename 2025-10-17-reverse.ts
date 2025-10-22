@@ -1,18 +1,18 @@
 // 反轉陣列
 
-function reverse(arr: Array<number>): Array<number> | null {
+function reverse(source: Array<number>): Array<number> {
     // 檢查空陣列
-    if (arr.length === 0) {
-        return null;
+    if (source.length === 0) {
+        return [];
     }
 
-    const n: number = arr.length;
-    const arr2: Array<number> = new Array(n);
+    const len: number = source.length;
+    const reversed: Array<number> = new Array(len);
 
-    for (let i = 0; i < n; i++) {
-        arr2[n - i - 1] = arr[i];
+    for (let i = 0, j = len - 1; i < len; i++, j--) {
+        reversed[j] = source[i];
     }
-    return arr2;
+    return reversed;
 }
 
 console.log(reverse([9, 8, 7])); // [ 7, 8, 9 ]

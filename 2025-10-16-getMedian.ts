@@ -1,14 +1,39 @@
 import { sortArray } from "./2025-10-15-sortArray.ts";
 
-export function copyArray (a: Array<number>): Array<number> {
-    const aCopy: Array<number> = [];
+export function copyArray (source: Array<number>): Array<number> {
+    const copied: Array<number> = [];
 
-    for (let i = 0; i < a.length; i++) {
-        aCopy[i] = a[i];
+    for (let i = 0; i < source.length; i++) {
+        copied[i] = source[i];
     }
     // console.log('Original a:', a);
     // console.log('Copy a:', aCopy);
-    return aCopy;
+    return copied;
+}
+
+function useEffect(fn: () => void) {
+
+}
+
+useEffect(() => {
+    console.log("Hello")
+});
+
+function testCopy() {
+    const source = [1, 2, 3, 4] // could be random
+    const copied = copyArray(source)
+
+    // 檢查複製陣列與原陣列的長度是否相等
+    if (source.length !== copied.length) {
+        console.log("ERROR: The length of source does not equal to the length of copied")
+    }
+
+    // 檢查複製陣列與原陣列的每個值是否一致
+    for (let i = 0; i < source.length; i++) {
+        if (source[i] !== copied[i]) {
+            console.log("ERROR: ...")
+        }
+    }
 }
 
 function getMedian (a: Array<number>): number | null {
@@ -18,41 +43,61 @@ function getMedian (a: Array<number>): number | null {
     }
     
     // 複製原陣列
-    const aCopy: Array<number> = copyArray(a);
-    const n: number = aCopy.length;
-
-    // 阻擋 null 進入主邏輯
-    if (sortArray(aCopy) === null) { return null }
-
+    const copiedArray: Array<number> = copyArray(a);
     // 將複製的陣列排序
-    const sortedArray = sortArray(aCopy);
+    const sortedArray = sortArray(copiedArray)
+    // 阻擋 null 進入主邏輯
+    if (sortedArray === null) { return null }
 
-    let halfIndex: number = Math.floor(n / 2);
-    let median: number = 0;
+    const middleIndex: number = Math.floor(copiedArray.length / 2);
     // 求陣列的中間索引，取出中位數
-    if (n % 2 === 1 && sortedArray !== null) {
-        median = sortedArray[halfIndex];
-    } else if (n % 2 === 0 && sortedArray !== null) {
-        median = (sortedArray[halfIndex] + sortedArray[halfIndex - 1]) / 2;
+    if (copiedArray.length % 2 === 1) {
+        return sortedArray[middleIndex];
+    } 
+    else { 
+        // 不需要寫 else if (n % 2 === 0)，因為餘數只有兩種情況： = 1 or != 1
+        return (sortedArray[middleIndex] + sortedArray[middleIndex - 1]) / 2;
     }
-    return median;
 }
+
+// randomNonnegativeInteger的特徵是：
+//  (number) => number
+function randomNonnegativeInteger(upperLimit: number): number {
+    return Math.floor(Math.random() * upperLimit);
+}
+
+function randomBoolean(): boolean {
+    return Math.random() < 0.5
+}
+
+function randomSign(): number {
+    return randomBoolean() ? -1 : 1
+}
+
+// toSorted(f: (a: number, b: number) => number): Array<number>
+
+// toSorted的特徵是：
+//  ((number, number) => number) => Array<number>
 
 // 單元測試
 function test(): boolean {
-    const randomLen = Math.floor(Math.random() * 100);
+    const randomLen = randomNonnegativeInteger(100)
     const arr: Array<number> = new Array(randomLen);
     
     // 對陣列賦值
     for (let j: number = 0; j < randomLen; j++) {
-        const randomNum = (Math.random() < 0.5 ? -1 : 1) * Number.parseFloat((Math.random() * 100).toFixed(2));
+        const randomNum = randomSign() * Number.parseFloat((Math.random() * 100).toFixed(2));
         arr[j] = randomNum;
     }
     // console.log("The test array:", arr);
     
     // 對照組：保證輸出正確答案，用來檢查實驗組
+    let sorted: ((a: number, b: number) => number) = 
+        (a, b) => a - b;
+    // const sortedArr = arr.toSorted(sorted); 
     const sortedArr = arr.toSorted((a, b) => a - b); // 依照數值大小
-    // const sortedArr = arr.sort() { /* 第一個字比對 */ };
+    
+    // const sortedArr = arr.sort() // 第一個字比對;
     console.log("Original array:", arr);
     console.log("Sorted array:", sortedArr);
 

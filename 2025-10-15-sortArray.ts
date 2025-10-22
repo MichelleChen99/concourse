@@ -50,10 +50,10 @@
 // }
 
 //. Version 3: Bubble Sort 雙層迴圈 + flag
-export function sortArray(a: Array<number>): Array<number> | null {
+export function sortArray(a: Array<number>): Array<number> {
     // 檢查空陣列
     if (a.length === 0) {
-        return null;
+        return a;
     }
 
     const n = a.length;

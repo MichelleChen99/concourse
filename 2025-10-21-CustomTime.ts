@@ -18,10 +18,6 @@ export function addHours(t: CustomTime, numOfHours: number): CustomTime {
   result.minute = t.minute;
   result.second = t.second;
 
-  // -1 % 24 = ?? // -1
-
-  //TODO: The conditions look redundant.
-
   //-- Normalize 應該只用result.hour判斷就好，不需要用numOfHours
   result.hour = modulo(t.hour + numOfHours, 24);
 
@@ -50,22 +46,12 @@ export function addMinutes(t: CustomTime, numOfMinutes: number): CustomTime {
   result.minute = t.minute + numOfMinutes;
   result.second = t.second;
 
-  // 正向跨時
-  if (result.minute >= 60) {
-    result.hour = addHours(result, Math.floor(result.minute / 60)).hour;
-    // 應該用result當參數而非t，否則可能因為不正確的依賴性出錯：addHours(t, Math.floor(result.minute / 60)).hour;
-    result.minute = result.minute % 60;
-  }
-  // 負向跨時
-  else if (result.minute < 0) {
-    result.hour = addHours(result, Math.floor(result.minute / 60)).hour;
-    result.minute = modulo(result.minute, 60); //TODO: Unnecessary
-    // 避免numOfMinutes太大，造成result.minute仍>=60，再取一次餘數
-  }
-  // 該小時內
-  else {
+  if (result.minute >= 0 && result.minute < 60) {
     // Nothing to adjust
-    // result.minute = result.minute % 60; //TODO: Unnecessary
+    result.minute;
+  } else {
+    result.hour = addHours(result, Math.floor(result.minute / 60)).hour;
+    result.minute = modulo(result.minute, 60);
   }
   return result;
 }
@@ -81,7 +67,6 @@ export function addMinutes(t: CustomTime, numOfMinutes: number): CustomTime {
 // logTime(addMinutes(t, -360)); // 14:12:59
 
 export function addSeconds(t: CustomTime, numOfSeconds: number): CustomTime {
-  //TODO: Should reuse `addMinutes`
   const addedMinutes: number = Math.floor((t.second + numOfSeconds) / 60);
   const result: CustomTime = addMinutes(t, addedMinutes); // 建立新實例，並同時賦值給小時、分鐘
 
@@ -139,6 +124,24 @@ export function modulo(n: number, m: number) {
 // // result.hour >= 0
 // else {
 //   result.hour = result.hour % 24;
+// }
+
+// addMinutes錯誤寫法：
+// // 正向跨時
+// if (result.minute >= 60) {
+//   result.hour = addHours(result, Math.floor(result.minute / 60)).hour;
+//   // 應該用result當參數而非t，否則可能因為不正確的依賴性出錯：addHours(t, Math.floor(result.minute / 60)).hour;
+//   result.minute = result.minute % 60;
+// }
+// // 負向跨時
+// else if (result.minute < 0) {
+//   result.hour = addHours(result, Math.floor(result.minute / 60)).hour;
+//   result.minute = modulo(result.minute, 60);
+// }
+// // 該小時內
+// else {
+//   // Nothing to adjust
+//   // result.minute = result.minute % 60; // Unnecessary
 // }
 
 // addSeconds錯誤寫法：

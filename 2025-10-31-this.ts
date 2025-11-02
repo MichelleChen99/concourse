@@ -59,7 +59,6 @@ date.addByYears(5);
 //   result.month = d.month;
 //   result.day = d.day;
 
-//   // 自動修正非法日期，包括閏年的調整
 //   const daysInTargetMonth = getDaysInMonth(result.year, result.month);
 //   if (result.day > daysInTargetMonth) {
 //     result.day = daysInTargetMonth;

@@ -10,8 +10,8 @@ class CustomDate {
     console.log(`${d.year}/${d.month}/${d.day}`);
   }
 
-  copyCustomDate() {
-    const result = new CustomDate();
+  copyCustomDate(): CustomDate {
+    const result: CustomDate = new CustomDate();
     result.year = this.year;
     result.month = this.month;
     result.day = this.day;
@@ -20,7 +20,7 @@ class CustomDate {
   }
 
   addYears(n: number): CustomDate {
-    const copied = this.copyCustomDate();
+    const copied: CustomDate = this.copyCustomDate();
     copied.addByYears(n);
     // 複製物件，再呼叫函式改動資料，等價於：this.copyCustomDate().addByYears(n);
     copied.day = Math.min(

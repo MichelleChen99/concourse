@@ -11,43 +11,65 @@
 //     return true;
 // }
 
-//  解法b. 迴圈跑出任一false，就判定為非矩陣
-export function isMatrix(a: Array<Array<number>>): boolean {
-    if (a.length === 0) {
-        return false;
-    } // 處理空陣列
-
-        for(let row: number = 1; row < a.length; row++) {
-            // console.log("log: ", a[0].length === a[row].length);
-            if(a[0].length !== a[row].length) {
-                return false;
-            }
-        }
-    return true;
+class Array2<ElementType> {
+  values: ElementType[] = [];
 }
 
-console.log(isMatrix([
+class Pair<KeyType, ValueType> {
+  key: KeyType;
+  value: ValueType;
+
+  constructor(key: KeyType, value: ValueType) {
+    this.key = key;
+    this.value = value;
+  }
+}
+
+//  解法b. 迴圈跑出任一false，就判定為非矩陣
+export function isMatrix(a: Array<Array<number>>): boolean {
+  if (a.length === 0) {
+    return false;
+  } // 處理空陣列
+
+  for (let row: number = 1; row < a.length; row++) {
+    // console.log("log: ", a[0].length === a[row].length);
+    if (a[0].length !== a[row].length) {
+      return false;
+    }
+  }
+  return true;
+}
+
+console.log(
+  isMatrix([
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3, 4],
-])) // false
+  ])
+); // false
 
-console.log(isMatrix([
+console.log(
+  isMatrix([
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3],
     [1, 2, 3],
-])) // true
+  ])
+); // true
 
-console.log(isMatrix([
+console.log(
+  isMatrix([
     [2, 3],
     [1, 2, 3],
     [1, 2, 3],
-])) // false
+  ])
+); // false
 
-console.log(isMatrix([
+console.log(
+  isMatrix([
     [2, 3, 4],
     [2, 3],
     [1, 2, 3],
-])) // false
+  ])
+); // false

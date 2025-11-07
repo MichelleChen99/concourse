@@ -30,7 +30,7 @@ export function addYears(d: CustomDate, numOfYears: number): CustomDate {
 
   return result;
 }
-// logDate(addYears(d, 30)); // 2055/10/21
+
 // logDate(addYears(d, 3000)); // 5025/10/21
 // logDate(addYears(d, -3000)); // -975/10/21
 // logDate(addYears(d, -300)); // 1725/10/21
@@ -106,7 +106,7 @@ export function isLeapYear(year: number) {
 }
 
 // logDate(addDays(d, 33)); // 2025/11/23
-logDate(addDays(d, 77)); // 2026/1/6
+// logDate(addDays(d, 77)); // 2026/1/6
 // logDate(addDays(d, 342)); // 2026/9/28
 // logDate(addDays(d, 533)); // 2027/4/7
 // logDate(addDays(d, -33)); // 2025/9/18

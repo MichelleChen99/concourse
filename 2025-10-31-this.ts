@@ -51,7 +51,7 @@ const result = date.addYears(5);
 // date -> 1970/1/1
 
 date.addByYears(5);
-// date -> 1975/1/1
+// date -> 1975/1/1 更改原始資料
 
 // function addYears(d: CustomDate, numOfYears: number): CustomDate {
 //   const result = new CustomDate();

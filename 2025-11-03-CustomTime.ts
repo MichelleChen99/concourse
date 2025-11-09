@@ -18,7 +18,7 @@ class CustomTime {
     return result;
   }
 
-  // 產生 1 個 CustomTime 物件
+  // 產生 1 個 CustomTime 物件（addHours）
   addHours(n: number): CustomTime {
     const copied: CustomTime = this.copyCustomTime();
     copied.addByHours(n);
@@ -31,7 +31,7 @@ class CustomTime {
     this.hour = modulo(this.hour + n, 24);
   }
 
-  // 產生 2 個 CustomTime 物件
+  // 產生 2 個 CustomTime 物件（addMinutes * 1 + addByMinutes * 1）
   addMinutes(n: number): CustomTime {
     const copied: CustomTime = this.copyCustomTime();
     copied.addByMinutes(n);
@@ -39,7 +39,7 @@ class CustomTime {
     return copied;
   }
 
-  // 產生 1 個 CustomTime 物件
+  // 產生 1 個 CustomTime 物件（addHours * 1）
   addByMinutes(n: number): void {
     this.minute = this.minute + n;
 
@@ -52,7 +52,7 @@ class CustomTime {
     }
   }
 
-  // 產生 3 個 CustomTime 物件
+  // 產生 3 個 CustomTime 物件（addSeconds * 1 + addBySeconds * 2）
   addSeconds(n: number) {
     const copied: CustomTime = this.copyCustomTime();
     copied.addBySeconds(n);
@@ -60,7 +60,7 @@ class CustomTime {
     return copied;
   }
 
-  // 產生 2 個 CustomTime 物件
+  // 產生 2 個 CustomTime 物件（addMinutes * 2）
   addBySeconds(n: number) {
     const addedMinutes: number = Math.floor((this.second + n) / 60);
 

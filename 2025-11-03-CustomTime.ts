@@ -76,7 +76,7 @@ class CustomTime {
 }
 
 const time: CustomTime = new CustomTime();
-time.addHours(3).addMinutes(30).addSeconds(369).logTime(); // 物件導向寫法：可串接 (chainable)
+time.addHours(3).addMinutes(30).addSeconds(369).logTime(); // 全部寫在Class內：方法可串接 (chainable)
 // time.addMinutes(30).logTime();
 // time.addSeconds(369).logTime();
 

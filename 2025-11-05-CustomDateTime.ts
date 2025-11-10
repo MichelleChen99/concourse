@@ -85,8 +85,8 @@ function addBySecondsToDateTime(
   dt: CustomDateTime,
   numOfSeconds: number
 ): void {
-  const SECONDS_PER_DAY: number = 24 * 60 * 60;
   const SECONDS_PER_HOUR: number = 60 * 60;
+  const SECONDS_PER_DAY: number = 24 * 60 * 60;
   const totalSeconds: number =
     dt.time.hour * SECONDS_PER_HOUR +
     dt.time.minute * 60 +

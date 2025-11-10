@@ -44,13 +44,14 @@ function addMinutes(t: CustomTime, numOfMinutes: number): CustomTime {
 }
 
 function addByMinutes(t: CustomTime, numOfMinutes: number): void {
-  const totalMinutes: number = t.minute + numOfMinutes;
+  const addedMinutes: number = t.minute + numOfMinutes;
 
-  if (totalMinutes >= 0 && totalMinutes < 60) {
-    t.minute = totalMinutes;
+  if (addedMinutes >= 0 && addedMinutes < 60) {
+    // Nothing to adjust
+    t.minute = addedMinutes;
   } else {
-    t.hour = addHours(t, Math.floor(totalMinutes / 60)).hour;
-    t.minute = modulo(totalMinutes, 60);
+    t.hour = addHours(t, Math.floor(addedMinutes / 60)).hour;
+    t.minute = modulo(addedMinutes, 60);
   }
 }
 // logTime(addMinutes(t, 40));
@@ -63,9 +64,11 @@ function addSeconds(t: CustomTime, numOfSeconds: number): CustomTime {
 }
 
 function addBySeconds(t: CustomTime, numOfSeconds: number): void {
-  const totalSeconds: number = t.second + numOfSeconds;
+  const addedMinutes: number = Math.floor((t.second + numOfSeconds) / 60);
+  const minutesAdded = addMinutes(t, addedMinutes);
 
-  t.minute = addMinutes(t, Math.floor(totalSeconds / 60)).minute;
-  t.second = modulo(totalSeconds, 60);
+  t.hour = minutesAdded.hour;
+  t.minute = minutesAdded.minute;
+  t.second = modulo(t.second + numOfSeconds, 60);
 }
 // logTime(addSeconds(t, 444));

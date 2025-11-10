@@ -50,9 +50,9 @@ function addMonths(d: CustomDate, numOfMonths: number): CustomDate {
 }
 
 function addByMonths(d: CustomDate, numOfMonths: number): void {
-  const totalMonths: number = d.month + numOfMonths;
-  d.year = d.year + Math.floor((totalMonths - 1) / 12);
-  d.month = modulo(totalMonths - 1, 12) + 1;
+  const addedMonths: number = d.month + numOfMonths;
+  d.year = d.year + Math.floor((addedMonths - 1) / 12);
+  d.month = modulo(addedMonths - 1, 12) + 1;
 }
 // logDate(addMonths(d, 17));
 
@@ -64,21 +64,21 @@ function addDays(d: CustomDate, numOfDays: number): CustomDate {
 }
 
 function addByDays(d: CustomDate, numOfDays: number): void {
-  let totalDays: number = d.day + numOfDays;
+  let addedDays: number = d.day + numOfDays;
   // 正向跨月
-  while (totalDays > getDaysInMonth(d.year, d.month)) {
-    totalDays -= getDaysInMonth(d.year, d.month);
+  while (addedDays > getDaysInMonth(d.year, d.month)) {
+    addedDays -= getDaysInMonth(d.year, d.month);
     const next = addMonths(d, 1);
     d.year = next.year;
     d.month = next.month;
   }
   // 負向跨月
-  while (totalDays <= 0) {
+  while (addedDays <= 0) {
     const prev = addMonths(d, -1);
     d.year = prev.year;
     d.month = prev.month;
-    totalDays += getDaysInMonth(d.year, d.month);
+    addedDays += getDaysInMonth(d.year, d.month);
   }
-  d.day = totalDays;
+  d.day = addedDays;
 }
 // logDate(addDays(d, 365));

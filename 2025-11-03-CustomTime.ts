@@ -63,8 +63,8 @@ class CustomTime {
   // 產生 2 個 CustomTime 物件（addMinutes * 2）
   addBySeconds(n: number) {
     const addedMinutes: number = Math.floor((this.second + n) / 60);
-
     const minutesAdded = this.addMinutes(addedMinutes);
+
     this.hour = minutesAdded.hour;
     this.minute = minutesAdded.minute;
 

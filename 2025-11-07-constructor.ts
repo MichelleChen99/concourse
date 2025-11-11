@@ -3,7 +3,7 @@ class CustomDate2 {
   month: number;
   day: number;
 
-  // constructor傳入參數，就不用寫外部函式賦值
+  // constructor傳入參數，就不用寫外部變數賦值
   constructor(year: number, month: number, day: number) {
     this.year = year;
     this.month = month;

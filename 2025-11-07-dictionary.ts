@@ -4,10 +4,6 @@ class Pair {
   person: Person;
 
   constructor(id: string, person: Person) {
-    // Q: 建構Pair資料時就先驗證？
-    // if (id !== person.id) {
-    //   throw new Error("Inconsistent id between Pair and Person");
-    // }
     this.id = id;
     this.person = person;
   }
@@ -24,88 +20,78 @@ class Person {
 
   // 傳id作為參數：確保建構的實例都一定有id
   constructor(id: string) {
-    // Q: 建構Person資料時就先驗證？
-    // if (!id) {
-    //   throw new Error("Invalid ID");
-    // }
+    //TODO: What else to confirm?
+    if (id.trim() === "") {
+      throw new Error("Invalid ID");
+    }
+
     this.id = id;
+
+    // Q: `!id` 什麼時候會是 `true` ?
+    // A: 例如像是 id === undefined, id === null 時 => 這些原本就無法通過string型別的檢驗
+    // Conclusion:
+    //  This section is unnecessary.
+    // if(!id)  equivalent to (id === undefined || id === null)
   }
 }
 
 class Dictionary {
-  //TODO: How to make sure that
+  // How to make sure that
   //  Pair.id === Pair.person.id ??
   //  i.e. 如何確保data的一致性
   //   1. 定義一致性
   //   2. 確保一致性
   values: Array<Pair> = new Array<Pair>();
 
-  // 資料驗證1：
-  // Q: 放在Person的constructor？
-  validateInputID(id: string): boolean {
-    return id !== undefined && id.trim() !== "";
-  }
-
-  // 資料驗證2：
-  // Q: 放在Pair的constructor？
+  // 資料驗證：
   validateConsistency(id: string, person: Person): boolean {
     return id === person.id;
   }
 
   getPerson(id: string): Person | null {
-    // 資料驗證：id !== undefined && id !== 空字串
-    if (this.validateInputID(id)) {
-      for (let i = 0; i < this.values.length; i++) {
-        if (id === this.values[i].id) {
-          return this.values[i].person;
-        }
+    for (let i = 0; i < this.values.length; i++) {
+      if (id === this.values[i].id) {
+        return this.values[i].person;
       }
     }
+
     return null;
   }
 
   // 無條件新增或覆蓋
   // 若id重複，用新id的資料覆蓋掉舊id的資料 （Dictionary特性）
   //  [補充] 資料庫容許兩個重複的id，例如：新資料覆蓋掉舊資料的當下、子資料庫存有副本
+  // 資料驗證：Pair.id === Pair.person.id
   addPerson(id: string, person: Person): Person | null {
-    // 資料驗證：id !== undefined && id !== 空字串 + Pair.id === Pair.person.id
-    if (this.validateInputID(id) && this.validateConsistency(id, person)) {
-      for (let i = 0; i < this.values.length; i++) {
-        if (id === this.values[i].id) {
-          this.values[i].person = person; // 找到重複的person，覆蓋
-          return null;
-        }
-      }
+    if (!this.validateConsistency(id, person)) {
+      throw new Error("Inconsistency between id and person.id");
     }
-    this.values[this.values.length] = new Pair(id, person); // 沒找到就新增
-    return this.values[this.values.length - 1].person;
+
+    return this.addPerson2(person);
   }
 
   addPerson2(person: Person): Person | null {
     //TODO: Implement
-    // 資料驗證：Pair.id === Pair.person.id
-    if (this.validateConsistency(person.id, person)) {
-      for (let i = 0; i < this.values.length; i++) {
-        if (person.id === this.values[i].id) {
-          this.values[i].person = person;
-          return null;
-        }
+    for (let i = 0; i < this.values.length; i++) {
+      if (person.id === this.values[i].id) {
+        this.values[i].person = person; // 找到重複的person，覆蓋
+        return null;
       }
     }
-    this.values[this.values.length] = new Pair(person.id, person);
+
+    this.values[this.values.length] = new Pair(person.id, person); // 沒找到就新增
     return this.values[this.values.length - 1].person;
   }
   //Requirement:
   // 找不到才新增
   getOrPut(id: string, newPerson: () => Person): Person | null {
-    const exist = this.getPerson(id); // getPerson已包含id驗證
+    const exist = this.getPerson(id);
 
     if (exist !== null) {
       return exist;
     } else {
       const newPerson2 = newPerson();
-      this.addPerson(id, newPerson2);
-      return newPerson2;
+      return this.addPerson(id, newPerson2); // 已包含id一致性檢查
     }
   }
 
@@ -128,20 +114,18 @@ class Dictionary {
   }
 
   containsID(id: string): boolean {
-    // 資料驗證：id !== undefined && id !== 空字串
-    if (this.validateInputID(id)) {
-      for (let i = 0; i < this.values.length; i++) {
-        if (this.values[i].id === id) {
-          return true;
-        }
+    for (let i = 0; i < this.values.length; i++) {
+      if (this.values[i].id === id) {
+        return true;
       }
     }
+
     return false;
   }
 }
 
-const dic: Dictionary = new Dictionary();
-const p = dic.getOrPut("A123456789", () => new Person("A123456789"));
+// const dic: Dictionary = new Dictionary();
+// const p = dic.getOrPut("A123456789", () => new Person("A123456789"));
 // console.log(p);
 
 // console.log(dic);
@@ -177,12 +161,12 @@ bob.mobile = "0922-222-222";
 // bob.id = "B987654321"; // constructor直接用參數建構id
 
 // 新增成員至 dic2（Dictionary）
-// dic2.addPerson(alice.id, alice);
+dic2.addPerson(alice.id, alice);
 // dic2.addPerson(bob.id, bob);
-dic2.addPerson2(alice);
-dic2.addPerson2(bob);
+// dic2.addPerson2(alice);
+// dic2.addPerson2(bob);
 // console.log(dic2);
-// console.log(dic2.values[0].person.lastName);
+// console.log(dic2.values[0].person.id);
 // Dictionary {
 //   values: [
 //     Pair { id: 'A123456789', person: [Person] },
@@ -191,6 +175,9 @@ dic2.addPerson2(bob);
 // }
 
 // console.log(dic2.values[0].id); // A123456789
+
+// const dic: Dictionary = new Dictionary();
+// const p = dic.getOrPut("A123456789", () => new Person("A123456000"));
 
 // console.log(
 //   dic2.containsPerson({
